@@ -7,7 +7,7 @@ Lập trình tìm tất cả các hoán vị của chuỗi. VD: ABC ACB BAC BCA 
 ##################################################################################
 */
 #include <iostream>
-#include <vector> 
+#include <vector>
 #include <string>
 #include <cctype>
 
