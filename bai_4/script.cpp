@@ -3,76 +3,64 @@
 (  ̳• · • ̳)
 /    づ♡                           ~ Louiszn ~
 ##################################################################################
-Viết chương trình thực hiện phép cộng 2 số tự nhiên lớn (không quá 255 chữ số).
+Lập trình tìm tất cả các hoán vị của dãy số nguyên (1, 2, 3, …, n).
 ##################################################################################
 */
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 #include <string>
 
+void permute(std::vector<int> &nums, std::vector<std::vector<int>> &result, int start)
+{
+    if (start == nums.size())
+    {
+        result.push_back(nums);
+        return;
+    }
+
+    for (int i = start; i < nums.size(); i++)
+    {
+        std::swap(nums[start], nums[i]);
+        permute(nums, result, start + 1);
+        std::swap(nums[start], nums[i]);
+    }
+}
 int main()
 {
-    std::string a, b;
+    int n;
+    std::cout << "Nhap mot con so nguyen duong: ";
+    std::cin >> n;
 
-    std::cout << "Nhap so a (Khong qua 255 chu so): ";
-    std::cin >> a;
-    std::cout << "Nhap so b (Khong qua 255 chu so): ";
-    std::cin >> b;
+    if (std::to_string(n).length() > 3) {
+        std::cout << "Ban co chac muon lam dieu nay khong? Con so nay co the khien may ban bi lag do!" << std::endl;
+        std::string answer;
+        while(answer == "yes" || answer == "no") {
+            if (answer == "no") {
+                system("pause");
+                return 0;
+            }
+        }
+    } 
 
-    int
-        len_a = a.length(),
-        len_b = b.length(),
-        sum[255] = {0},
-        i = len_a - 1,
-        j = len_b - 1,
-        k = 0,
-        carry = 0;
+    std::vector<int> nums(n);
 
-    while (i >= 0 || j >= 0)
+    for (int i = 0; i < n; i++)
     {
-        int x = 0, y = 0;
-
-        if (i >= 0)
-        {
-            x = a[i] - '0';
-            i--;
-        }
-
-        if (j >= 0)
-        {
-            y = b[j] - '0';
-            j--;
-        }
-
-        int s = x + y + carry;
-
-        if (s > 9)
-        {
-            carry = 1;
-            s = s - 10;
-        }
-        else
-        {
-            carry = 0;
-        }
-
-        sum[k] = s;
-        k++;
+        nums[i] = i + 1;
     }
 
-    if (carry > 0)
+    std::vector<std::vector<int>> result;
+    permute(nums, result, 0);
+
+    for (auto permutation : result)
     {
-        sum[k] = carry;
-        k++;
+        for (auto num : permutation)
+        {
+            std::cout << num << " ";
+        }
+        std::cout << std::endl;
     }
-
-    for (int i = k - 1; i >= 0; i--)
-    {
-        std::cout << sum[i];
-    }
-
-    std::cout << std::endl;
-
-    system("pause");
     return 0;
 }

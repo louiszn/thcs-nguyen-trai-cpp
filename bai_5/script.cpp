@@ -3,42 +3,75 @@
 (  ̳• · • ̳)
 /    づ♡                           ~ Louiszn ~
 ##################################################################################
-Viết chương trình nhập vào một số nguyên dương và kiểm tra số đó có phải là số Amstrong không
+Viết chương trình thực hiện phép cộng 2 số tự nhiên lớn (không quá 255 chữ số).
 ##################################################################################
 */
 
 #include <iostream>
-#include <cmath>
+#include <string>
 
 int main()
 {
-    int n, k = 0, sum = 0, temp;
-    std::cout << "Nhap vao mot so nguyen duong: ";
-    std::cin >> n;
+    std::string a, b;
 
-    temp = n;
-    while (temp > 0)
+    std::cout << "Nhap so a (Khong qua 255 chu so): ";
+    std::cin >> a;
+    std::cout << "Nhap so b (Khong qua 255 chu so): ";
+    std::cin >> b;
+
+    int
+        len_a = a.length(),
+        len_b = b.length(),
+        sum[255] = {0},
+        i = len_a - 1,
+        j = len_b - 1,
+        k = 0,
+        carry = 0;
+
+    while (i >= 0 || j >= 0)
     {
+        int x = 0, y = 0;
+
+        if (i >= 0)
+        {
+            x = a[i] - '0';
+            i--;
+        }
+
+        if (j >= 0)
+        {
+            y = b[j] - '0';
+            j--;
+        }
+
+        int s = x + y + carry;
+
+        if (s > 9)
+        {
+            carry = 1;
+            s = s - 10;
+        }
+        else
+        {
+            carry = 0;
+        }
+
+        sum[k] = s;
         k++;
-        temp /= 10;
     }
 
-    temp = n;
-    while (temp > 0)
+    if (carry > 0)
     {
-        int digit = temp % 10;
-        sum += pow(digit, k);
-        temp /= 10;
+        sum[k] = carry;
+        k++;
     }
 
-    if (sum == n)
+    for (int i = k - 1; i >= 0; i--)
     {
-        std::cout << n << " la so Armstrong" << std::endl;
+        std::cout << sum[i];
     }
-    else
-    {
-        std::cout << n << " khong phai la so Armstrong" << std::endl;
-    }
+
+    std::cout << std::endl;
 
     system("pause");
     return 0;
