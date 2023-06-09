@@ -2,6 +2,7 @@
     "files.associations": {
         "*.embeddedhtml": "html",
         "utility": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "cstring": "cpp"
     },
 }

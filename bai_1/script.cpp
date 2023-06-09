@@ -50,5 +50,6 @@ int main()
     std::cin >> n;
     find_primes(n, first_prime, second_prime);
     std::cout << n << " = " << first_prime << " + " << second_prime << std::endl;
+    system("pause");
     return 0;
 }

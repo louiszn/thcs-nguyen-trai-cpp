@@ -76,5 +76,6 @@ int main()
 
     std::cout << n << " = " << expression << std::endl;
 
+    system("pause");
     return 0;
 }

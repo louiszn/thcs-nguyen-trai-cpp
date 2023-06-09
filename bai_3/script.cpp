@@ -50,5 +50,6 @@ int main()
     {
         std::cout << p << std::endl;
     }
+    system("pause");
     return 0;
 }
